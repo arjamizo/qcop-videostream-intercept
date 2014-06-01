@@ -59,7 +59,8 @@ class NewElement(gst.Element):
 		#this is where we do filtering
 		#and then push a buffer to the next element, returning a value saying
 		# it was either successful or not.
-		return self.srcpad.push(buf)
+		outbuf = buf.copy_on_write()
+		return self.srcpad.push(outbuf)
 
 #here we register our class with glib, the c-based object system used by
 #gstreamer
