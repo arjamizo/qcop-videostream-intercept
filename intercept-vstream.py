@@ -65,14 +65,15 @@ class NewElement(gst.Element):
 		outbuf = buf.copy_on_write()
 		self.draw_on(outbuf)
 		return self.srcpad.push(outbuf)
-		
+	o=0
 	def draw_on (self, buf):
 		try:
 			caps = buf.get_caps()
 			width = caps[0]['width']
 			height = caps[0]['height']
 			framerate = caps[0]['framerate']
-			width, height = width/2, height/2
+			# width = width/2
+			height = height/2
 			surface = cairo.ImageSurface.create_for_data (buf, cairo.FORMAT_ARGB32, width, height, 4 * width)
 			ctx = cairo.Context(surface)
 		except:
@@ -81,8 +82,9 @@ class NewElement(gst.Element):
 			return
 
 		try:
-			center_x = width/4
-			center_y = 3*height/4
+			center_x = (width/4 + self.o)%width
+			center_y = (3*height/4 + self.o)%height
+			self.o+=10
 
 			# draw a circle
 			radius = float (min (width, height)) * 0.25
@@ -133,8 +135,7 @@ class GTK_Main:
 
 		# Set up the gstreamer pipeline
 		self.player = gst.Pipeline("player")
-		# src = gst.element_factory_make ("v4l2src")
-		src = gst.element_factory_make ("videotestsrc")
+		src = gst.element_factory_make ("v4l2src")
 		cf = gst.element_factory_make ("capsfilter")
 		WIDTH, HEIGHT, FRAMERATE = 640, 480, 15
 		caps = gst.caps_from_string ("video/x-raw-yuv,format=(fourcc)YUY2,width=%d,height=%d,framerate=%d/1" % (WIDTH, HEIGHT, FRAMERATE))
