@@ -31,7 +31,11 @@ class GTK_Main:
 		window.show_all()
 
 		# Set up the gstreamer pipeline
-		self.player = gst.parse_launch ("v4l2src ! autovideosink")
+		self.player = gst.Pipeline("player")
+		src = gst.element_factory_make("v4l2src", "camera")
+		sink = gst.element_factory_make('autovideosink')
+		self.player.add(src, sink)
+		gst.element_link_many(src, sink)
 
 		bus = self.player.get_bus()
 		bus.add_signal_watch()
