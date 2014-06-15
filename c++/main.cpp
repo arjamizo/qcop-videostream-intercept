@@ -1,30 +1,22 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
-
-using namespace cv;
-
-int main(int argc, char** argv )
+#include <iostream>
+#include <opencv2/highgui/highgui_c.h>
+using namespace std;
+char key;
+int main()
 {
-	system("pwd");
-    if ( argc != 2 )
-    {
-        printf("usage: DisplayImage.out <Image_Path>\n");
-        return -1;
-    }
-
-    Mat image;
-    image = imread( argv[1], 1 );
-
-    if ( !image.data )
-    {
-        printf("No image data \n");
-        return -1;
-    }
-    //namedWindow("Display Image", CV_WINDOW_AUTOSIZE );
-    //imshow("Display Image", image);
-	imwrite( "ret.jpg", image );
-
-    waitKey(0);
-
-    return 0;
+cvNamedWindow("Camera_Output", 1); //Create window
+CvCapture* capture = cvCaptureFromCAM(CV_CAP_ANY); //Capture using any camera connected to your system
+while(1){ //Create infinte loop for live streaming
+IplImage* frame = cvQueryFrame(capture); //Create image frames from capture
+cvShowImage("Camera_Output", frame); //Show image frames on created window
+key = cvWaitKey(10); //Capture Keyboard stroke
+if (char(key) == 27){
+break; //If you hit ESC key loop will break.
+}
+}
+cvReleaseCapture(&capture); //Release capture.
+cvDestroyWindow("Camera_Output"); //Destroy Window
+return 0;
 }
