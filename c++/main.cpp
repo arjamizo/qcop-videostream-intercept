@@ -20,8 +20,9 @@ int main(int argc, char** argv )
         printf("No image data \n");
         return -1;
     }
-    namedWindow("Display Image", CV_WINDOW_AUTOSIZE );
-    imshow("Display Image", image);
+    //namedWindow("Display Image", CV_WINDOW_AUTOSIZE );
+    //imshow("Display Image", image);
+	imwrite( "ret.jpg", image );
 
     waitKey(0);
 
