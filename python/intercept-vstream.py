@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 import sys, os
-import pygtk, gtk, gobject
+import pygtk 
+import gtk 
+import gobject
 import pygst
 pygst.require("0.10")
 import gst
@@ -142,6 +144,7 @@ class GTK_Main:
 		cf.set_property ("caps", caps)
 		filter = NewElement()
 		sink = gst.element_factory_make('autovideosink')
+		# sink = gst.element_factory_make('tcpserversink') #def port 4953
 		self.player.add(src, cf, filter, sink)
 		gst.element_link_many(src, cf, filter, sink)
 
