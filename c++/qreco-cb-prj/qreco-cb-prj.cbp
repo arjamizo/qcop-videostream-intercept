@@ -3,23 +3,60 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="qreco-cb-prj" />
+		<Option execution_dir="/home/azochniak/prjs/qcop-recocar/c++/" />
 		<Option pch_mode="2" />
-		<Option compiler="null" />
+		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/qreco-cb-prj" prefix_auto="1" extension_auto="1" />
+				<Option working_dir=".." />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="null" />
+				<Option compiler="gcc" />
+				<Option parameters="a.png" />
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/qreco-cb-prj" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
-				<Option compiler="null" />
+				<Option compiler="gcc" />
 			</Target>
 		</Build>
-		<Unit filename="main.cpp" />
+		<Compiler>
+			<Add option="`pkg-config --cflags --libs opencv`" />
+			<Add option="`pkg-config  --cflags --libs gstreamer-1.0`" />
+			<Add option="`pkg-config --cflags --libs gtk+-2.0`" />
+<Add directory="/usr/include/gstreamer-1.0"/>
+<Add directory="/usr/include/glib-2.0"/>
+<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/includ"/>
+<Add directory="/usr/include/gtk-2.0"/>
+<Add directory="/usr/lib/x86_64-linux-gnu/gtk-2.0/include"/>
+<Add directory="/usr/include/atk-1.0"/>
+<Add directory="/usr/include/cairo"/>
+<Add directory="/usr/include/gdk-pixbuf-2.0"/>
+<Add directory="/usr/include/pango-1.0"/>
+<Add directory="/usr/include/gio-unix-2.0/"/>
+<Add directory="/usr/include/freetype2"/>
+<Add directory="/usr/include/glib-2.0"/>
+<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+<Add directory="/usr/include/pixman-1"/>
+<Add directory="/usr/include/libpng12"/>
+<Add directory="/usr/include/harfbuzz"/>
+<Add directory="/usr/include/opencv"/>
+
+		</Compiler>
+		<Linker>
+			<Add option="-I/usr/include/opencv  /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so /usr/lib/x86_64-linux-gnu/libopencv_contrib.so /usr/lib/x86_64-linux-gnu/libopencv_core.so /usr/lib/x86_64-linux-gnu/libopencv_features2d.so /usr/lib/x86_64-linux-gnu/libopencv_flann.so /usr/lib/x86_64-linux-gnu/libopencv_gpu.so /usr/lib/x86_64-linux-gnu/libopencv_highgui.so /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so /usr/lib/x86_64-linux-gnu/libopencv_legacy.so /usr/lib/x86_64-linux-gnu/libopencv_ml.so /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so /usr/lib/x86_64-linux-gnu/libopencv_ocl.so /usr/lib/x86_64-linux-gnu/libopencv_photo.so /usr/lib/x86_64-linux-gnu/libopencv_stitching.so /usr/lib/x86_64-linux-gnu/libopencv_superres.so /usr/lib/x86_64-linux-gnu/libopencv_ts.so /usr/lib/x86_64-linux-gnu/libopencv_video.so /usr/lib/x86_64-linux-gnu/libopencv_videostab.so -lopencv_calib3d -lopencv_contrib -lopencv_core -lopencv_features2d -lopencv_flann -lopencv_gpu -lopencv_highgui -lopencv_imgproc -lopencv_legacy -lopencv_ml -lopencv_objdetect -lopencv_ocl -lopencv_photo -lopencv_stitching -lopencv_superres -lopencv_ts -lopencv_video -lopencv_videostab" />
+			<Add option="-pthread -I/usr/include/gstreamer-0.10 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libxml2  -pthread -lgstreamer-0.10 -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lxml2 -lglib-2.0" />
+			<Add option="-pthread" />
+			<Add option="-I/usr/include/gtk-2.0 -I/usr/lib/arm-linux-gnueabihf/gtk-2.0/include -I/usr/include/atk-1.0" />
+			<Add option="-I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0" />
+			<Add option="-I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/arm-linux-gnueabihf/glib-2.0/include" />
+			<Add option="-I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12" />
+			<Add option="-lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0" />
+		</Linker>
+		<Unit filename="../Makefile" />
+		<Unit filename="../main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
