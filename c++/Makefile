@@ -9,4 +9,6 @@ createFolder:
 bin/Debug/qreco-cb-prj: main.cpp
 	ls .
 	#opencv
-	g++ main.cpp `pkg-config --cflags --libs gstreamer-1.0 gtk+-2.0` -o ${NAME}qreco-cb-prj
+	g++ main.cpp `pkg-config --cflags --libs gstreamer-1.0 gtk+-2.0` -o bin/Debug/qreco-cb-prj
+run:
+	CLIENTIP=192.168.104 && raspivid -n -w 1280 -h 720 -b 4500000 -fps 30 -vf -hf -t 0 -o - | bin/Debug/qreco-cb-prj
