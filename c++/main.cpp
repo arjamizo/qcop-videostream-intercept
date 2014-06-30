@@ -5,12 +5,14 @@ Works with
 CLIENTIP=192.168.103 gst-launch-1.0 -v v4l2src ! timeoverlay shaded-background=true text="pi" ! video/x-raw,height=480,width=640,framerate=30/1 ! videoconvert ! omxh264enc ! rtph264pay ! udpsink host=$CLIENTIP port=5000
 OR
 http://wiki.oz9aec.net/index.php/Raspberry_Pi_Camera#Gstreamer_using_RTP.2FUDP
+
 */
 #include <stdlib.h>
 #include <stdio.h>
 #define prexit(err) {printf(err " Error in line %d", __LINE__);exit(__LINE__%100);}
 int main(int argc, char *argv[]) {
 
+	putenv("GST_DEBUG=1");
 	GstElement *pipeline;
 	GstBus *bus;
 	GstMessage *msg;
